@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
-import logo from '../../../assets/images/logo/logo.png'
+import logo from '../../../assets/images/logo/logo.png';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -19,9 +19,17 @@ const Navbar = () => {
           <Link to='/' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
             Home
           </Link>
-          <Link to='about' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
-            About
+          <Link to='instructors' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+            Instructors
           </Link>
+          <Link to='classes' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+            Classes
+          </Link>
+          {user && (
+            <Link to='/dashboard' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+              Dashboard
+            </Link>
+          )}
         </div>
 
         <div className="flex items-center ml-4">
@@ -30,6 +38,7 @@ const Navbar = () => {
               <img
                 className="h-8 w-8 rounded-full"
                 src={user.photoURL}
+                alt="Profile Picture"
                 title={user.displayName}
               />
               <button
