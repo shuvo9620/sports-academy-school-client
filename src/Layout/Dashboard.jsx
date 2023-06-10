@@ -35,8 +35,8 @@ const Dashboard = () => {
                             <>
                                 {isInstructor ? (
                                     <>
-                                        <li><Link to="/dashboard/addClasses">Add Class</Link></li>
-                                        <li><Link to="/dashboard/myClasses">My Class</Link></li>
+                                        <li><Link to="/dashboard/addsession">Add Class</Link></li>
+                                        <li><Link to="/dashboard/mysession">My Class</Link></li>
                                         <li><Link to="/">Go Home</Link></li>
 
                                     </>

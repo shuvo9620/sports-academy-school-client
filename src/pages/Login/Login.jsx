@@ -1,16 +1,13 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
-import { useContext, useRef } from 'react'
-import { AuthContext } from '../../providers/AuthProvider'
 import { ImSpinner } from 'react-icons/im'
+import useAuth from '../../hooks/useAuth'
 
 const Login = () => {
-    const { loading, setLoading, signIn, signInWithGoogle } =
-        useContext(AuthContext)
+    const { loading, setLoading, signIn, signInWithGoogle } = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
-    const emailRef = useRef()
 
     // Handle submit
     const handleSubmit = event => {
@@ -49,8 +46,6 @@ const Login = () => {
                 </div>
                 <form
                     onSubmit={handleSubmit}
-                    noValidate=''
-                    action=''
                     className='space-y-6 ng-untouched ng-pristine ng-valid'
                 >
                     <div className='space-y-4'>
@@ -59,10 +54,8 @@ const Login = () => {
                                 Email
                             </label>
                             <input
-                                ref={emailRef}
                                 type='email'
                                 name='email'
-                                id='email'
                                 required
                                 placeholder='Enter Your Email'
                                 className='w-full px-4 py-3 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-100 text-gray-900'
@@ -78,7 +71,6 @@ const Login = () => {
                             <input
                                 type='password'
                                 name='password'
-                                id='password'
                                 required
                                 placeholder='Enter Your Password'
                                 className='w-full px-4 py-3 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-100 text-gray-900'

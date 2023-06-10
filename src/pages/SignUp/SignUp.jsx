@@ -1,28 +1,35 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
-import { useContext, useRef } from 'react'
-import { AuthContext } from '../../providers/AuthProvider'
 import { ImSpinner } from 'react-icons/im'
+import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/useAuth'
 
 const SignUp = () => {
-    const {
-        loading,
-        setLoading,
-        signInWithGoogle,
-        createUser,
-        updateUserProfile,
-    } = useContext(AuthContext)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const { loading, setLoading, signInWithGoogle, createUser, updateUserProfile
+    } = useAuth();
+
+    const onSubmit = data => {
+        console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        console.log('user profile updated');
+                        reset()
+                    })
+                    .catch(error => console.error(error))
+            })
+    }
+
+
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
-    // Handle user registration
-    const handleSubmit = event => {
-        event.preventDefault()
-        const name = event.target.name.value
-        const email = event.target.email.value
-        const password = event.target.password.value
-    }
 
     // Handle google signin
     const handleGoogleSignIn = () => {
@@ -42,40 +49,24 @@ const SignUp = () => {
                 <div className='mb-8 text-center'>
                     <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
                 </div>
-                <form
-                    onSubmit={handleSubmit}
-                    noValidate=''
-                    action=''
-                    className='space-y-6 ng-untouched ng-pristine ng-valid'
+                <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 ng-untouched ng-pristine ng-valid'
                 >
                     <div className='space-y-4'>
                         <div>
                             <label htmlFor='email' className='block mb-2 text-sm'>
                                 Name
                             </label>
-                            <input
-                                type='text'
-                                name='name'
-                                id='name'
-                                placeholder='Enter Your Name Here'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                                data-temp-mail-org='0'
-                            />
+                            <input {...register("name", { required: true })} type='text' name='name' placeholder='Enter Your Name Here' className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0' />
+                            {errors.name && <span className='text-red-600'>Name is required</span>}
                         </div>
 
                         <div>
                             <label htmlFor='email' className='block mb-2 text-sm'>
                                 Email address
                             </label>
-                            <input
-                                type='email'
-                                name='email'
-                                id='email'
-                                required
-                                placeholder='Enter Your Email Here'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                                data-temp-mail-org='0'
-                            />
+                            <input {...register("email", { required: true })} type='email' name='email' required placeholder='Enter Your Email Here' className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900' data-temp-mail-org='0' />
+                            {errors.email && <span className='text-red-600'>Email is required</span>}
                         </div>
                         <div>
                             <div className='flex justify-between'>
@@ -83,40 +74,29 @@ const SignUp = () => {
                                     Password
                                 </label>
                             </div>
-                            <input
-                                type='password'
-                                name='password'
-                                id='password'
-                                required
-                                placeholder='Your Password'
-                                className='w-full mb-2 px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                            />
+                            <input {...register("password", { required: true, minLength: 6, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })} type='password' name='password' required placeholder='Your Password' className='w-full mb-2 px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900' />
+
+                            {errors.password && <span className='text-red-600'>Password is required</span>}
+                            {errors.password?.type === 'minLength' && <p className='text-red-600'>
+                                Password must be at least 6 characters</p>}
+                            {errors.password?.type === 'pattern' && <p className='text-red-600'>
+                                Password must be one upperCase one number and one special character</p>}
+
                             <div className='flex justify-between'>
                                 <label htmlFor='password' className='text-sm mb-2'>
                                     Confirm Password
                                 </label>
                             </div>
-                            <input
-                                type='password'
-                                name='password'
-                                id='password'
-                                required
-                                placeholder='Your Password'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                            />
+                            <input {...register("confirmPassword", { required: true })} type='password' name='confirmPassword' required placeholder='Your Password' className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900' />
+                            {errors.confirmPassword && <span className='text-red-600'>Confirm Password is required</span>}
                         </div>
                         <div>
                             <label htmlFor='email' className='block mb-2 text-sm'>
                                 Photo Url
                             </label>
-                            <input
-                                type='text'
-                                name='photo'
-                                required
-                                placeholder='Photo URL'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                                data-temp-mail-org='0'
-                            />
+                            <input {...register("photo", { required: true })} type='text' name='photo' required placeholder='Photo URL' className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0' />
+                            {errors.photo && <span className='text-red-600'>Name is required</span>}
                         </div>
                     </div>
 
