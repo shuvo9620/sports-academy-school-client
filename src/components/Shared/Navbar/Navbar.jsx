@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 py-4">
+    <nav className="bg-gray-700 py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link to='/' className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-auto" />
