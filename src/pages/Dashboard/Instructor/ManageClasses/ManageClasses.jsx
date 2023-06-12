@@ -22,7 +22,7 @@ const ManageClasses = () => {
     const handleUpdateStatus = async (status, id) => {
         setClickedStatus(status);
         try {
-            const response = await fetch(`http://localhost:5000/instructors/${id}/status`, {
+            const response = await fetch(`https://sports-academy-school-server.vercel.app/instructors/${id}/status`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
@@ -39,7 +39,7 @@ const ManageClasses = () => {
     const handleFeedBack = async (id) => {
 
         try {
-            const response = await fetch(`http://localhost:5000/instructors/${id}`, {
+            const response = await fetch(`https://sports-academy-school-server.vercel.app/instructors/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
