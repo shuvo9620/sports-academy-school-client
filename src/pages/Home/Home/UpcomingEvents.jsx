@@ -17,7 +17,7 @@ const UpcomingEvents = () => {
             title: 'Basketball Tryouts',
             date: 'July 15, 2023',
             location: 'Basketball Court',
-            imageUrl: 'https://example.com/event-image3.jpg'
+            imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=890&q=80'
         }
     ];
 
