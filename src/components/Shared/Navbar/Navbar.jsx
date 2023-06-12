@@ -10,23 +10,35 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-700 py-4">
+    <nav className="bg-gray-800 py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link to='/' className="flex items-center">
-          <img src={logo} alt="Logo" className="h-12 w-auto" />
+          <img src={logo} alt="Logo" className="h-8 w-auto" />
         </Link>
-        <div>
-          <Link to='/' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+        <div className="space-x-4">
+          <Link
+            to='/'
+            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded transition duration-300"
+          >
             Home
           </Link>
-          <Link to='instructors' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+          <Link
+            to='/instructors'
+            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded transition duration-300"
+          >
             Instructors
           </Link>
-          <Link to='classes' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+          <Link
+            to='/classes'
+            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded transition duration-300"
+          >
             Classes
           </Link>
           {user && (
-            <Link to='/dashboard' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded">
+            <Link
+              to='/dashboard'
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded transition duration-300"
+            >
               Dashboard
             </Link>
           )}
@@ -43,20 +55,19 @@ const Navbar = () => {
               />
               <button
                 onClick={handleLogOut}
-                className="ml-4 px-4 py-2 rounded bg-gray-800 text-white hover:bg-gray-600"
+                className="btn btn-neutral text-white hover:bg-green-700 transition duration-300"
               >
                 Log Out
               </button>
             </>
           ) : (
             <Link to="/login">
-              <button className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-500">
+              <button className="btn btn-primary text-white hover:bg-rose-500 transition duration-300">
                 Login
               </button>
             </Link>
           )}
         </div>
-
       </div>
     </nav>
   );

@@ -1,10 +1,10 @@
-
 import { useForm } from 'react-hook-form';
-import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../../../hooks/useAuth';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
 
-const AddSession = () => {
+const AddClasses = () => {
     const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { user } = useAuth();
@@ -25,7 +25,13 @@ const AddSession = () => {
                 axiosSecure.post('/instructors', newItems).then(data => {
                     if (data.data.insertedId) {
                         reset();
-                        alert('Data uploaded successfully');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Class Added Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                     }
                 })
             }
@@ -35,7 +41,7 @@ const AddSession = () => {
 
     return (
         <div className="w-full">
-            <h3 className='text-center font-bold mb-4'>Add Classes</h3>
+            <h3 className='text-center text-3xl font-bold  mt-6 mb-4'>Add Classes</h3>
             <form className="w-full max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                     <label className="block mb-1">Class Name</label>
@@ -73,11 +79,11 @@ const AddSession = () => {
                     {errors.seats && <span className="text-danger">This field is required</span>}
                 </div>
 
-                <button type="submit" className="btn btn-primary w-full py-2 mt-4">Add Classes</button>
+                <button type="submit" className="btn btn-neutral w-full py-2 mt-4">Add Classes</button>
             </form>
         </div>
 
     );
 };
 
-export default AddSession;
+export default AddClasses;
