@@ -22,13 +22,13 @@ const Footer = () => {
                 <div className="w-full md:w-1/3">
                     <h3 className="text-xl font-bold mb-4">Follow Us</h3>
                     <div className="flex space-x-4">
-                        <a href="#" className="text-white hover:text-gray-300">
+                        <a href="https://www.facebook.com/" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
-                        <a href="#" className="text-white hover:text-gray-300">
+                        <a href="twitter.com" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faTwitter} />
                         </a>
-                        <a href="#" className="text-white hover:text-gray-300">
+                        <a href="instagram.com" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
