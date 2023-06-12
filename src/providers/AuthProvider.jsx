@@ -30,11 +30,6 @@ const AuthProvider = ({ children }) => {
             .finally(() => setLoading(false));
     };
 
-    const resetPassword = email => {
-        setLoading(true);
-        return sendPasswordResetEmail(auth, email)
-            .finally(() => setLoading(false));
-    };
 
     const logOut = () => {
         setLoading(true);
