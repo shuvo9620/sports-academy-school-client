@@ -25,10 +25,10 @@ const Footer = () => {
                         <a href="https://www.facebook.com/" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
-                        <a href="twitter.com" className="text-white hover:text-gray-300">
+                        <a href="https://twitter.com/" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faTwitter} />
                         </a>
-                        <a href="instagram.com" className="text-white hover:text-gray-300">
+                        <a href="https://www.instagram.com/" className="text-white hover:text-gray-300">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
